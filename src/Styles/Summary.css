@@ -5,7 +5,7 @@
   justify-content: center;
   padding: 2rem;
   color: #334155;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .summary-container {
@@ -51,7 +51,7 @@
   background: #f9fafb;
   border-radius: 16px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .summary-right {
@@ -65,7 +65,7 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 1rem 1.2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border-left: 4px solid #2563eb;
 }
 

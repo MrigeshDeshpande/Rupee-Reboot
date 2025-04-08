@@ -1,17 +1,24 @@
-import React from 'react';
+import React from "react";
 
 const SummaryCard = ({ title, icon, data }) => {
   // Guard clause: avoid breaking if data is undefined or null
-  if (!data || typeof data !== 'object' || Array.isArray(data)) {
-    console.warn(`[SummaryCard] Skipped rendering "${title}" – invalid or missing data:`, data);
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    console.warn(
+      `[SummaryCard] Skipped rendering "${title}" – invalid or missing data:`,
+      data,
+    );
     return null;
   }
 
   return (
     <div className="summary-card">
-      <h4>{icon} {title}</h4>
+      <h4>
+        {icon} {title}
+      </h4>
       {Object.entries(data).map(([key, value]) => (
-        <p className="summary-item" key={key}>{key}: ₹{value}</p>
+        <p className="summary-item" key={key}>
+          {key}: ₹{value}
+        </p>
       ))}
     </div>
   );
