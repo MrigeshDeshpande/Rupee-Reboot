@@ -1,6 +1,6 @@
-import React from 'react';
-import '../styles/Auth.css';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "../styles/Auth.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -13,7 +13,9 @@ const Signup = () => {
           <input type="text" placeholder="Full Name" required />
           <input type="email" placeholder="Email" required />
           <input type="password" placeholder="Password" required />
-          <button type="submit" className="auth-btn">Sign Up</button>
+          <button type="submit" className="auth-btn">
+            Sign Up
+          </button>
         </form>
 
         <p className="auth-alt">
