@@ -1,6 +1,7 @@
 import React from 'react';
-import './LandingPage.css';
+import '../styles/LandingPage.css'; 
 import SuccessFactorsImg from '../assets/ok.svg';
+import { Link } from 'react-router-dom';
 
 
 function LandingPage() {
@@ -15,8 +16,8 @@ function LandingPage() {
           <ul className="nav-links">
             <li>Home</li>
             <li>About</li>
-            <li>Login</li>
-            <li>Sign Up</li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/signup">Sign Up</Link></li>
           </ul>
         </div>
       </nav>
