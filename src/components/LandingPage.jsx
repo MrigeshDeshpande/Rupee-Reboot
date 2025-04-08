@@ -35,9 +35,9 @@ function LandingPage() {
             </h1>
             <p>Simulate your finances with ease before life surprises you.</p>
             <div className="hero-buttons">
-            <Link to="/onboarding">
-              <button className="primary-btn">Get Started</button>
-            </Link>              
+              <Link to="/onboarding">
+                <button className="primary-btn">Get Started</button>
+              </Link>
               <button className="secondary-btn">Learn More</button>
             </div>
           </div>
