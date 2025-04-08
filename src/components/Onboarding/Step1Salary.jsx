@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * Step1Salary Component:
@@ -7,7 +7,7 @@ import React from 'react';
  */
 
 const Step1Salary = ({ onNext, formData, setFormData }) => {
-  const salary = formData.salary || '';
+  const salary = formData.salary || "";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +20,10 @@ const Step1Salary = ({ onNext, formData, setFormData }) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (value === '' || Number(value) >= 0) {
+    if (value === "" || Number(value) >= 0) {
       setFormData((prev) => ({
         ...prev,
-        salary: value
+        salary: value,
       }));
     }
   };
@@ -32,7 +32,9 @@ const Step1Salary = ({ onNext, formData, setFormData }) => {
     <div className="auth-page">
       <div className="auth-container">
         <h2 className="auth-title">Let's get started 💼</h2>
-        <p className="auth-subtitle">What’s your monthly take-home salary (after tax)?</p>
+        <p className="auth-subtitle">
+          What’s your monthly take-home salary (after tax)?
+        </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <input
@@ -42,7 +44,9 @@ const Step1Salary = ({ onNext, formData, setFormData }) => {
             onChange={handleChange}
             required
           />
-          <button type="submit" className="auth-btn">Next</button>
+          <button type="submit" className="auth-btn">
+            Next
+          </button>
         </form>
       </div>
     </div>

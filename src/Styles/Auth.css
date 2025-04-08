@@ -68,3 +68,27 @@
   color: #22c55e;
   text-decoration: none;
 }
+
+.auth-btn-group.spaced-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; /* Adjust spacing between buttons */
+  margin-top: 1.5rem;
+}
+
+.auth-btn-group.spaced-buttons .auth-btn {
+  flex: 1;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 1.1rem;
+  color: #334155;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}

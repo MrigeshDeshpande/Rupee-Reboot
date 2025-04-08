@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
@@ -6,8 +6,8 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
       ...prev,
       savings: {
         ...prev.savings,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     }));
   };
 
@@ -29,7 +29,7 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
             type="number"
             name="emergency"
             placeholder="Emergency Fund"
-            value={values.emergency || ''}
+            value={values.emergency || ""}
             onChange={handleChange}
             required
           />
@@ -37,14 +37,22 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
             type="number"
             name="investments"
             placeholder="Investments"
-            value={values.investments || ''}
+            value={values.investments || ""}
             onChange={handleChange}
             required
           />
 
           <div className="auth-btn-group spaced-buttons">
-            <button type="button" className="auth-btn secondary" onClick={prevStep}>Back</button>
-            <button type="submit" className="auth-btn">Next</button>
+            <button
+              type="button"
+              className="auth-btn secondary"
+              onClick={prevStep}
+            >
+              Back
+            </button>
+            <button type="submit" className="auth-btn">
+              Next
+            </button>
           </div>
         </form>
       </div>

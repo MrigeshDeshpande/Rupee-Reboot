@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
@@ -6,8 +6,8 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
       ...prev,
       variableExpenses: {
         ...prev.variableExpenses,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     }));
   };
 
@@ -22,14 +22,16 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
     <div className="auth-page">
       <div className="auth-container">
         <h2 className="auth-title">Spending That Changes 💳</h2>
-        <p className="auth-subtitle">Let’s capture your average monthly variable expenses.</p>
+        <p className="auth-subtitle">
+          Let’s capture your average monthly variable expenses.
+        </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <input
             type="number"
             name="groceries"
             placeholder="Groceries"
-            value={values.groceries || ''}
+            value={values.groceries || ""}
             onChange={handleChange}
             required
           />
@@ -37,7 +39,7 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
             type="number"
             name="transport"
             placeholder="Transport"
-            value={values.transport || ''}
+            value={values.transport || ""}
             onChange={handleChange}
             required
           />
@@ -45,14 +47,22 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
             type="number"
             name="entertainment"
             placeholder="Entertainment"
-            value={values.entertainment || ''}
+            value={values.entertainment || ""}
             onChange={handleChange}
             required
           />
 
           <div className="auth-btn-group spaced-buttons">
-            <button type="button" className="auth-btn secondary" onClick={prevStep}>Back</button>
-            <button type="submit" className="auth-btn">Next</button>
+            <button
+              type="button"
+              className="auth-btn secondary"
+              onClick={prevStep}
+            >
+              Back
+            </button>
+            <button type="submit" className="auth-btn">
+              Next
+            </button>
           </div>
         </form>
       </div>
