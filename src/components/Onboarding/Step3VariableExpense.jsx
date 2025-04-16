@@ -1,4 +1,5 @@
 import React from "react";
+import "../../Styles/Onboarding.css";
 
 const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
@@ -13,7 +14,7 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onNext(); // Nothing to pass explicitly since formData is already updated
+    onNext();
   };
 
   const values = formData.variableExpenses || {};
@@ -27,26 +28,28 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
+          <label htmlFor="groceries" className="label-custom">Groceries</label>
           <input
             type="number"
             name="groceries"
-            placeholder="Groceries"
             value={values.groceries || ""}
             onChange={handleChange}
             required
           />
+
+          <label htmlFor="transport" className="label-custom">Transport</label>
           <input
             type="number"
             name="transport"
-            placeholder="Transport"
             value={values.transport || ""}
             onChange={handleChange}
             required
           />
+          
+          <label htmlFor="entertainment" className="label-custom">Entertainment</label>
           <input
             type="number"
             name="entertainment"
-            placeholder="Entertainment"
             value={values.entertainment || ""}
             onChange={handleChange}
             required

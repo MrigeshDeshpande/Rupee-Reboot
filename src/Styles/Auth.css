@@ -24,9 +24,10 @@
 }
 
 .auth-subtitle {
-  color: #64748b;
+  color: #353d47;
   font-size: 1rem;
   margin-bottom: 2rem;
+  font-family:'Times New Roman', Times, serif;
 }
 
 .auth-form {
@@ -80,7 +81,7 @@
   flex: 1;
 }
 
-.input-group {
+/* .input-group {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -91,4 +92,4 @@
   color: #334155;
   margin-bottom: 0.4rem;
   font-weight: 500;
-}
+} */

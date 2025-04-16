@@ -1,4 +1,5 @@
 import React from "react";
+import "../../Styles/Onboarding.css";
 
 const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
@@ -21,22 +22,23 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
   return (
     <div className="auth-page">
       <div className="auth-container">
-        <h2 className="auth-title">Savings Goals..</h2>
+        <h2 className="auth-title">Savings Goals...</h2>
         <p className="auth-subtitle">How much are you saving every month?</p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
+        <label htmlFor="emergency_fund" className="label-custom">Emergency Fund</label>
           <input
             type="number"
             name="emergency"
-            placeholder="Emergency Fund"
             value={values.emergency || ""}
             onChange={handleChange}
             required
           />
+
+         <label htmlFor="investments" className="label-custom">Investments </label>
           <input
             type="number"
             name="investments"
-            placeholder="Investments"
             value={values.investments || ""}
             onChange={handleChange}
             required

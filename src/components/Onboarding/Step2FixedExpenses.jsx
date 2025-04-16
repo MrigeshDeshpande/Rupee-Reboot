@@ -1,4 +1,6 @@
 import React from "react";
+import "../../Styles/Onboarding.css";
+
 
 const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
@@ -25,8 +27,7 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
         </p>
 
         <form className="auth-form" onSubmit={handleNext}>
-          <div className="input-group">
-            <label htmlFor="rent">Rent</label>
+            <label htmlFor="rent" className="label-custom">Rent</label>
             <input
               id="rent"
               type="number"
@@ -35,10 +36,8 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
               onChange={handleChange}
               required
             />
-          </div>
 
-          <div className="input-group">
-            <label htmlFor="utilities">
+            <label htmlFor="utilities" className="label-custom">
               Utilities (Electricity, Water, etc.)
             </label>
             <input
@@ -49,10 +48,8 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
               onChange={handleChange}
               required
             />
-          </div>
 
-          <div className="input-group">
-            <label htmlFor="subscriptions">Subscriptions (Netflix, etc.)</label>
+            <label htmlFor="subscriptions" className="label-custom">Subscriptions (Netflix, etc.)</label>
             <input
               id="subscriptions"
               type="number"
@@ -61,7 +58,6 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
               onChange={handleChange}
               required
             />
-          </div>
 
           <div className="auth-btn-group spaced-buttons">
             <button

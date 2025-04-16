@@ -1,7 +1,6 @@
 import React from "react";
 
 const SummaryCard = ({ title, icon, data }) => {
-  // Guard clause: avoid breaking if data is undefined or null
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     console.warn(
       `[SummaryCard] Skipped rendering "${title}" – invalid or missing data:`,
