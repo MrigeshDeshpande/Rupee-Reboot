@@ -14,12 +14,24 @@ const OnboardingFlow = () => {
       utilities: "",
       subscriptions: "",
     },
+    variableExpenses: { 
+      groceries: "",
+      transport: "",
+      entertainment: ""
+    },
+    savings: { 
+      emergency: "",
+      investments: ""
+    }
   });
 
-  const handleNext = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
-    setStepIndex((prev) => prev + 1);
+  const handleNext = () => {
+    setStepIndex(prev => prev + 1);
   };
+
+  console.log("formData", formData);
+  console.log("stepIndex", stepIndex);
+  
 
   const handlePrev = () => {
     setStepIndex((prev) => Math.max(prev - 1, 0));

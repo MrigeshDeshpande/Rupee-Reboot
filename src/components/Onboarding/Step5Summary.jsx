@@ -13,20 +13,15 @@ const Step5Summary = ({ formData, prevStep }) => {
     savings = {},
   } = formData || {};
 
-  const totalFixed = Object.values(fixedExpenses).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalVariable = Object.values(variableExpenses).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalSavings = Object.values(savings).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalOutflow = totalFixed + totalVariable + totalSavings;
-  const remaining = salary - totalOutflow;
+const calculateTotal = (expenses) => 
+Object.values(expenses).reduce((sum, val) => sum + (Number(val) || 0), 0);
+
+const totalFixed = calculateTotal(fixedExpenses);
+const totalVariable = calculateTotal(variableExpenses);
+const totalSavings = calculateTotal(savings);
+
+const totalOutflow = totalFixed + totalVariable + totalSavings;
+const remaining = Math.max(0, salary - totalOutflow); 
 
   const chartData = [
     { name: "Fixed", value: totalFixed },
@@ -34,6 +29,10 @@ const Step5Summary = ({ formData, prevStep }) => {
     { name: "Savings", value: totalSavings },
     { name: "Remaining", value: remaining },
   ];
+
+  const handleSimulate = () => {
+    console.log("Simulating financial plan with:", formData);
+  };
 
   return (
     <div className="summary-page">
@@ -67,8 +66,7 @@ const Step5Summary = ({ formData, prevStep }) => {
           </button>
           <button
             className="primary-btn"
-            onClick={() => console.log("Simulating financial plan...")}
-          >
+            onClick={handleSimulate}          >
             Simulate Now
           </button>
         </div>

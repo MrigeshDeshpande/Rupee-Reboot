@@ -1,11 +1,5 @@
 import React from "react";
 
-/**
- * Step1Salary Component:
- * - Purpose: Collects user's monthly take-home salary.
- * - Uses formData to persist input across steps.
- */
-
 const Step1Salary = ({ onNext, formData, setFormData }) => {
   const salary = formData.salary || "";
 
@@ -15,12 +9,16 @@ const Step1Salary = ({ onNext, formData, setFormData }) => {
       alert("Please enter a valid salary greater than 0.");
       return;
     }
-    onNext({ salary: Number(salary) });
-  };
+    
+    setFormData(prev => ({
+      ...prev,
+      salary: Number(salary) 
+    }));
+    onNext();  };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (value === "" || Number(value) >= 0) {
+    if (value === "" || (!isNaN(value) && Number(value) >= 0)) {
       setFormData((prev) => ({
         ...prev,
         salary: value,

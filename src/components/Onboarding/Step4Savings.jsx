@@ -3,12 +3,13 @@ import "../../Styles/Onboarding.css";
 
 const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
-    setFormData((prev) => ({
+    const { name, value } = e.target;
+    setFormData(prev => ({
       ...prev,
       savings: {
         ...prev.savings,
-        [e.target.name]: e.target.value,
-      },
+        [name]: value
+      }
     }));
   };
 
@@ -17,7 +18,6 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
     onNext();
   };
 
-  const values = formData.savings || {};
 
   return (
     <div className="auth-page">
@@ -30,7 +30,7 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             type="number"
             name="emergency"
-            value={values.emergency || ""}
+            value={formData.savings.emergency || ""}
             onChange={handleChange}
             required
           />
@@ -39,7 +39,7 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             type="number"
             name="investments"
-            value={values.investments || ""}
+            value={formData.savings.investments || ""}
             onChange={handleChange}
             required
           />

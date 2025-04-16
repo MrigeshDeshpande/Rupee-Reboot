@@ -3,12 +3,13 @@ import "../../Styles/Onboarding.css";
 
 const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
-    setFormData((prev) => ({
+    const { name, value } = e.target;
+    setFormData(prev => ({
       ...prev,
       variableExpenses: {
         ...prev.variableExpenses,
-        [e.target.name]: e.target.value,
-      },
+        [name]: value
+      }
     }));
   };
 
@@ -17,7 +18,6 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
     onNext();
   };
 
-  const values = formData.variableExpenses || {};
 
   return (
     <div className="auth-page">
@@ -32,7 +32,7 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             type="number"
             name="groceries"
-            value={values.groceries || ""}
+            value={formData.variableExpenses.groceries || ""}
             onChange={handleChange}
             required
           />
@@ -41,7 +41,7 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             type="number"
             name="transport"
-            value={values.transport || ""}
+            value={formData.variableExpenses.transport || ""}
             onChange={handleChange}
             required
           />
@@ -50,7 +50,7 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             type="number"
             name="entertainment"
-            value={values.entertainment || ""}
+            value={formData.variableExpenses.entertainment || ""}
             onChange={handleChange}
             required
           />

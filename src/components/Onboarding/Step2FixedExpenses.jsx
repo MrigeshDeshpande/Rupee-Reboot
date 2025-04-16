@@ -1,16 +1,16 @@
 import React from "react";
 import "../../Styles/Onboarding.css";
 
-
 const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
       fixedExpenses: {
-        ...formData.fixedExpenses,
-        [e.target.name]: e.target.value,
-      },
-    });
+        ...prev.fixedExpenses,
+        [name]: value
+      }
+    }));
   };
 
   const handleNext = (e) => {
