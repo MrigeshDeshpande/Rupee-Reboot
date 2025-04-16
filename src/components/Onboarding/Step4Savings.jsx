@@ -4,12 +4,12 @@ import "../../Styles/Onboarding.css";
 const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       savings: {
         ...prev.savings,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -18,7 +18,6 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
     onNext();
   };
 
-
   return (
     <div className="auth-page">
       <div className="auth-container">
@@ -26,7 +25,9 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
         <p className="auth-subtitle">How much are you saving every month?</p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-        <label htmlFor="emergency_fund" className="label-custom">Emergency Fund</label>
+          <label htmlFor="emergency_fund" className="label-custom">
+            Emergency Fund
+          </label>
           <input
             type="number"
             name="emergency"
@@ -35,7 +36,9 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
             required
           />
 
-         <label htmlFor="investments" className="label-custom">Investments </label>
+          <label htmlFor="investments" className="label-custom">
+            Investments{" "}
+          </label>
           <input
             type="number"
             name="investments"

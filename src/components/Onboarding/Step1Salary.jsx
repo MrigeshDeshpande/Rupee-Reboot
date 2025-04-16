@@ -9,12 +9,13 @@ const Step1Salary = ({ onNext, formData, setFormData }) => {
       alert("Please enter a valid salary greater than 0.");
       return;
     }
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      salary: Number(salary) 
+      salary: Number(salary),
     }));
-    onNext();  };
+    onNext();
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;

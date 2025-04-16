@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function SummarySimulationView() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
 
-export default SummarySimulationView
+export default SummarySimulationView;

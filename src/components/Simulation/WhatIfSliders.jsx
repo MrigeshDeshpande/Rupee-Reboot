@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const WhatIfSliders = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default WhatIfSliders
+export default WhatIfSliders;

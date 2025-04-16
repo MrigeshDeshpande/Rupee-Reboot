@@ -13,15 +13,15 @@ const Step5Summary = ({ formData, prevStep }) => {
     savings = {},
   } = formData || {};
 
-const calculateTotal = (expenses) => 
-Object.values(expenses).reduce((sum, val) => sum + (Number(val) || 0), 0);
+  const calculateTotal = (expenses) =>
+    Object.values(expenses).reduce((sum, val) => sum + (Number(val) || 0), 0);
 
-const totalFixed = calculateTotal(fixedExpenses);
-const totalVariable = calculateTotal(variableExpenses);
-const totalSavings = calculateTotal(savings);
+  const totalFixed = calculateTotal(fixedExpenses);
+  const totalVariable = calculateTotal(variableExpenses);
+  const totalSavings = calculateTotal(savings);
 
-const totalOutflow = totalFixed + totalVariable + totalSavings;
-const remaining = Math.max(0, salary - totalOutflow); 
+  const totalOutflow = totalFixed + totalVariable + totalSavings;
+  const remaining = Math.max(0, salary - totalOutflow);
 
   const chartData = [
     { name: "Fixed", value: totalFixed },
@@ -64,9 +64,7 @@ const remaining = Math.max(0, salary - totalOutflow);
           <button className="primary-btn" onClick={prevStep}>
             Back
           </button>
-          <button
-            className="primary-btn"
-            onClick={handleSimulate}          >
+          <button className="primary-btn" onClick={handleSimulate}>
             Simulate Now
           </button>
         </div>

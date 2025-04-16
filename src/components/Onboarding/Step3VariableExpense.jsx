@@ -4,12 +4,12 @@ import "../../Styles/Onboarding.css";
 const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       variableExpenses: {
         ...prev.variableExpenses,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -17,7 +17,6 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
     e.preventDefault();
     onNext();
   };
-
 
   return (
     <div className="auth-page">
@@ -28,7 +27,9 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label htmlFor="groceries" className="label-custom">Groceries</label>
+          <label htmlFor="groceries" className="label-custom">
+            Groceries
+          </label>
           <input
             type="number"
             name="groceries"
@@ -37,7 +38,9 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
             required
           />
 
-          <label htmlFor="transport" className="label-custom">Transport</label>
+          <label htmlFor="transport" className="label-custom">
+            Transport
+          </label>
           <input
             type="number"
             name="transport"
@@ -45,8 +48,10 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
             onChange={handleChange}
             required
           />
-          
-          <label htmlFor="entertainment" className="label-custom">Entertainment</label>
+
+          <label htmlFor="entertainment" className="label-custom">
+            Entertainment
+          </label>
           <input
             type="number"
             name="entertainment"
