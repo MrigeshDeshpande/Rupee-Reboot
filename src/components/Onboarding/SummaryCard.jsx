@@ -1,24 +1,34 @@
 import React from "react";
+import "../../Styles/Summary.css";
 
-const SummaryCard = ({ title, icon, data }) => {
-  if (!data || typeof data !== "object" || Array.isArray(data)) {
-    console.warn(
-      `[SummaryCard] Skipped rendering "${title}" – invalid or missing data:`,
-      data,
-    );
-    return null;
-  }
+const SummaryCard = ({ title, icon, data, overrideTotal }) => {
+  const isSimulated = overrideTotal !== undefined;
+
+  const total = isSimulated
+    ? overrideTotal
+    : Object.values(data).reduce((sum, val) => sum + (Number(val) || 0), 0);
 
   return (
     <div className="summary-card">
-      <h4>
-        {icon} {title}
-      </h4>
-      {Object.entries(data).map(([key, value]) => (
-        <p className="summary-item" key={key}>
-          {key}: ₹{value}
-        </p>
-      ))}
+      <div className="summary-card-header">
+        <h3>
+          {icon} {title}
+        </h3>
+        <span className="summary-card-total">₹{total.toLocaleString()}</span>
+      </div>
+
+      {isSimulated ? (
+        <p className="simulated-note">Simulation mode active</p>
+      ) : (
+        <ul className="summary-card-list">
+          {Object.entries(data).map(([key, value]) => (
+            <li key={key}>
+              <span>{key}</span>
+              <span>₹{Number(value).toLocaleString()}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

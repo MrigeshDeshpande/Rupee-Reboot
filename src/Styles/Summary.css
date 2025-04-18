@@ -1,10 +1,21 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #22c55e;
+  --background-gradient: linear-gradient(to right, #f0fdf4, #e0f2fe);
+  --text-color: #334155;
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.06);
+}
+
+/* Base Styles */
 .summary-page {
-  background: linear-gradient(to right, #f0fdf4, #e0f2fe);
+  background: var(--background-gradient);
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2rem;
-  color: #334155;
+  color: var(--text-color);
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -13,13 +24,14 @@
   flex-wrap: wrap;
   max-width: 1100px;
   width: 100%;
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px var(--card-shadow);
   padding: 2rem;
   gap: 2rem;
 }
 
+/* Header Styles */
 .summary-header {
   width: 100%;
   text-align: center;
@@ -28,7 +40,7 @@
 
 .summary-header h2 {
   font-size: 1.8rem;
-  color: #2563eb;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
 
@@ -37,6 +49,7 @@
   color: #475569;
 }
 
+/* Left Section */
 .summary-left {
   flex: 1;
   display: flex;
@@ -44,6 +57,7 @@
   align-items: center;
 }
 
+/* Chart Container */
 .donut-chart-container {
   width: 100%;
   max-width: 460px;
@@ -51,9 +65,10 @@
   background: #f9fafb;
   border-radius: 16px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px var(--card-shadow);
 }
 
+/* Right Section */
 .summary-right {
   flex: 1;
   display: flex;
@@ -61,40 +76,85 @@
   gap: 1rem;
 }
 
+/* Card Styles */
 .summary-card {
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 1rem 1.2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border-left: 4px solid #2563eb;
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 30px; 
 }
 
 .summary-card h4 {
-  font-size: 1.1rem;
-  color: #2563eb;
-  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
 }
 
 .summary-item {
-  font-size: 0.95rem;
-  margin: 0.2rem 0;
+  font-size: 1rem;
+  margin: 0.5rem 0;
   font-weight: 500;
 }
 
 .summary-card.summary-footer {
-  border-left-color: #22c55e;
+  border-left-color: var(--secondary-color);
+  padding-top: 1rem;
 }
 
 .summary-card .green {
-  color: #22c55e;
+  color: var(--secondary-color);
   font-weight: 600;
+  margin-top: 0.5rem;
 }
 
 .summary-card .red {
   color: #ef4444;
   font-weight: 600;
+  margin-top: 0.5rem;
 }
 
+.summary-card ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0;
+}
+
+.summary-card ul li {
+  margin-bottom: 0.8rem; 
+  line-height: 1.5; 
+}
+
+.chart-section {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  gap: 20px; 
+  padding: 1rem 0; 
+}
+
+.auth-btn {
+  padding: 0.8rem 1.5rem; 
+  font-size: 1rem;
+}
+
+.summary-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.summary-card-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: large;
+}
+/* Buttons */
 .summary-buttons {
   width: 100%;
   display: flex;
@@ -114,7 +174,7 @@
 }
 
 .back-btn {
-  background-color: #2563eb;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -123,7 +183,7 @@
 }
 
 .simulate-btn {
-  background-color: #22c55e;
+  background-color: var(--secondary-color);
   color: white;
 }
 
@@ -152,4 +212,49 @@
   .simulate-btn {
     width: 100%;
   }
+}
+
+/* Simulated Note */
+.simulated-note {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+}
+
+
+.two-column-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  display: flex;
+  gap: 20px;
+}
+
+/* Left and Right columns */
+.left-column {
+  flex: 2;
+  padding-right: 15px;
+}
+
+.right-column {
+  width: 35%; 
+  min-width: 370px;
+  align-self: flex-start;
+  margin-left: 200px; 
+  flex: 1; 
+  padding-left: 15px;
+}
+
+.sliders-section {
+  margin-top: 1rem;
+}
+
+
+.navigation-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
 }

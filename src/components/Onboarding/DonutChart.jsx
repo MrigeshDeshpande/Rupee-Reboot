@@ -1,9 +1,17 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#22c55e", "#2563eb", "#f59e0b", "#ef4444"];
+const COLORS = {
+  Fixed: "#22c55e",
+  Variable: "#3b82f6",
+  Savings: "#f59e0b",
+  Remaining: "#ef4444",
+};
 
 const DonutChart = ({ data }) => {
+  const total = data.reduce((acc, item) => acc + item.value, 0);
+  const remaining = data.find((item) => item.name === "Remaining")?.value || 0;
+
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -18,18 +26,18 @@ const DonutChart = ({ data }) => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     const value = data[index].value;
 
-    if (value / data.reduce((a, b) => a + b.value, 0) < 0.03) return null;
+    if (value / total < 0.03) return null;
 
     return (
       <text
         x={x}
         y={y}
-        fill={COLORS[index % COLORS.length]}
+        fill={COLORS[data[index].name] || "#888"}
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
         style={{ fontSize: "12px", fontWeight: "500" }}
       >
-        {`${data[index].name}: ₹${value}`}
+        {`${data[index].name}: ₹${value.toLocaleString()}`}
       </text>
     );
   };
@@ -49,10 +57,25 @@ const DonutChart = ({ data }) => {
           label={renderCustomizedLabel}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[entry.name] || "#ccc"}
+            />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip
+          formatter={(value, name) => [`₹${value.toLocaleString()}`, name]}
+        />
+        {/* Center label for remaining */}
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          style={{ fontSize: "18px", fontWeight: "600" }}
+        >
+          ₹{remaining.toLocaleString()}
+        </text>
       </PieChart>
     </ResponsiveContainer>
   );
