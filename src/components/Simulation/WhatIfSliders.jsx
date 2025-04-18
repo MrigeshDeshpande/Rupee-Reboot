@@ -9,7 +9,10 @@ const WhatIfSliders = ({
   onCancel,
   salary,
 }) => {
-  const totalAllocated = Object.values(values).reduce((sum, val) => sum + val, 0);
+  const totalAllocated = Object.values(values).reduce(
+    (sum, val) => sum + val,
+    0,
+  );
   const remaining = salary - totalAllocated;
   const isOverBudget = remaining < 0;
 

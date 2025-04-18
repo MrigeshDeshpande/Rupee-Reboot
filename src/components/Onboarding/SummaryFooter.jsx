@@ -7,9 +7,7 @@ const SummaryFooter = ({ totalOutflow, remaining }) => {
 
   return (
     <div className="summary-card summary-footer">
-      <p className="green">
-        💸 Total Outflow: ₹{formattedOutflow}
-      </p>
+      <p className="green">💸 Total Outflow: ₹{formattedOutflow}</p>
       <p className={isNegative ? "red" : "green"}>
         {isNegative ? "⚠️" : "💰"} Remaining: ₹{formattedRemaining}
       </p>

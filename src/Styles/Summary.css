@@ -83,7 +83,7 @@
   padding: 1rem 1.2rem;
   box-shadow: 0 4px 12px var(--card-shadow);
   border-left: 4px solid var(--primary-color);
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .summary-card h4 {
@@ -116,31 +116,31 @@
 }
 
 .summary-card ul {
-  list-style: none; 
-  padding: 0; 
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
 .summary-card ul li {
-  margin-bottom: 0.8rem; 
-  line-height: 1.5; 
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
 }
 
 .chart-section {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 20px; 
-  padding: 1rem 0; 
+  gap: 20px;
+  padding: 1rem 0;
 }
 
 .auth-btn {
-  padding: 0.8rem 1.5rem; 
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
 }
 
-.summary-card-header{
+.summary-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -222,7 +222,6 @@
   margin-top: 0.5rem;
 }
 
-
 .two-column-layout {
   display: flex;
   flex-direction: row;
@@ -240,18 +239,17 @@
 }
 
 .right-column {
-  width: 35%; 
+  width: 35%;
   min-width: 370px;
   align-self: flex-start;
-  margin-left: 200px; 
-  flex: 1; 
+  margin-left: 200px;
+  flex: 1;
   padding-left: 15px;
 }
 
 .sliders-section {
   margin-top: 1rem;
 }
-
 
 .navigation-buttons {
   margin-top: 2rem;

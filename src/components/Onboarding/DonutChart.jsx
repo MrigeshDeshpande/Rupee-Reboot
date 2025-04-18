@@ -57,10 +57,7 @@ const DonutChart = ({ data }) => {
           label={renderCustomizedLabel}
         >
           {data.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS[entry.name] || "#ccc"}
-            />
+            <Cell key={`cell-${index}`} fill={COLORS[entry.name] || "#ccc"} />
           ))}
         </Pie>
         <Tooltip
