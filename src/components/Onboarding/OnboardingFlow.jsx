@@ -29,7 +29,6 @@ const OnboardingFlow = () => {
     setStepIndex((prev) => prev + 1);
   };
 
-
   const handlePrev = () => {
     setStepIndex((prev) => Math.max(prev - 1, 0));
   };

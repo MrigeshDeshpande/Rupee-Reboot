@@ -10,7 +10,6 @@ const SummaryFooter = ({ totalOutflow, remaining }) => {
       ? `-${Math.abs(remaining).toLocaleString()}`
       : `${remaining.toLocaleString()}`;
 
-
   return (
     <div
       className={`summary-card summary-footer ${isNegative ? "warning" : ""}`}
