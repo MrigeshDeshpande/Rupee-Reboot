@@ -3,11 +3,12 @@ import "../../Styles/Onboarding.css";
 
 const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       variableExpenses: {
         ...prev.variableExpenses,
-        [e.target.name]: e.target.value,
+        [name]: value,
       },
     }));
   };
@@ -16,8 +17,6 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
     e.preventDefault();
     onNext();
   };
-
-  const values = formData.variableExpenses || {};
 
   return (
     <div className="auth-page">
@@ -28,29 +27,35 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label htmlFor="groceries" className="label-custom">Groceries</label>
+          <label htmlFor="groceries" className="label-custom">
+            Groceries
+          </label>
           <input
             type="number"
-            name="groceries"
-            value={values.groceries || ""}
+            name="Groceries"
+            value={formData.variableExpenses.Groceries || ""}
             onChange={handleChange}
             required
           />
 
-          <label htmlFor="transport" className="label-custom">Transport</label>
+          <label htmlFor="transport" className="label-custom">
+            Transport
+          </label>
           <input
             type="number"
-            name="transport"
-            value={values.transport || ""}
+            name="Transport"
+            value={formData.variableExpenses.Transport || ""}
             onChange={handleChange}
             required
           />
-          
-          <label htmlFor="entertainment" className="label-custom">Entertainment</label>
+
+          <label htmlFor="entertainment" className="label-custom">
+            Entertainment
+          </label>
           <input
             type="number"
-            name="entertainment"
-            value={values.entertainment || ""}
+            name="Entertainment"
+            value={formData.variableExpenses.Entertainment || ""}
             onChange={handleChange}
             required
           />

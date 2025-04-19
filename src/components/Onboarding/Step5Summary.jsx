@@ -1,76 +1,173 @@
-import React from "react";
-import DonutChart from "./DonutChart.jsx";
-import SummaryCard from "./SummaryCard.jsx";
-import SalaryCard from "./SalaryCard.jsx";
-import SummaryFooter from "./SummaryFooter.jsx";
+import React, { useState, useMemo } from "react";
+import DonutChart from "./DonutChart";
+import SummaryCard from "./SummaryCard";
+import SalaryCard from "./SalaryCard";
+import SummaryFooter from "./SummaryFooter";
+import WhatIfSliders from "../Simulation/WhatIfSliders";
 import "../../Styles/Summary.css";
 
-const Step5Summary = ({ formData, prevStep }) => {
-  const {
-    salary = 0,
-    fixedExpenses = {},
-    variableExpenses = {},
-    savings = {},
-  } = formData || {};
+const Step5Summary = ({ formData }) => {
+  const [simulateMode, setSimulateMode] = useState(false);
+  const [simulatedValues, setSimulatedValues] = useState({
+    fixed: 0,
+    variable: 0,
+    savings: 0,
+  });
 
-  const totalFixed = Object.values(fixedExpenses).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalVariable = Object.values(variableExpenses).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalSavings = Object.values(savings).reduce(
-    (a, b) => a + Number(b),
-    0,
-  );
-  const totalOutflow = totalFixed + totalVariable + totalSavings;
-  const remaining = salary - totalOutflow;
+  // Memoized calculations
+  const { totalFixed, totalVariable, totalSavings, totalOutflow, remaining } =
+    useMemo(() => {
+      const calculateTotal = (expenses) =>
+        Object.values(expenses).reduce(
+          (sum, val) => sum + (Number(val) || 0),
+          0,
+        );
 
-  const chartData = [
-    { name: "Fixed", value: totalFixed },
-    { name: "Variable", value: totalVariable },
-    { name: "Savings", value: totalSavings },
-    { name: "Remaining", value: remaining },
-  ];
+      const fixed = calculateTotal(formData?.fixedExpenses || {});
+      const variable = calculateTotal(formData?.variableExpenses || {});
+      const savings = calculateTotal(formData?.savings || {});
+      const outflow = fixed + variable + savings;
+      const remaining = Math.max(0, (formData?.salary || 0) - outflow);
+
+      return {
+        totalFixed: fixed,
+        totalVariable: variable,
+        totalSavings: savings,
+        totalOutflow: outflow,
+        remaining,
+      };
+    }, [formData]);
+
+  const categories = {
+    fixed: { label: "Fixed", color: "#22c55e" },
+    variable: { label: "Variable", color: "#3b82f6" },
+    savings: { label: "Savings", color: "#f59e0b" },
+  };
+
+  const handleSimulate = () => {
+    setSimulatedValues({
+      fixed: totalFixed,
+      variable: totalVariable,
+      savings: totalSavings,
+    });
+    setSimulateMode(true);
+  };
+
+  const handleSliderChange = (category, value) => {
+    setSimulatedValues((prev) => ({
+      ...prev,
+      [category]: Number(value),
+    }));
+  };
+
+  const chartData = simulateMode
+    ? [
+        { name: "Fixed", value: simulatedValues.fixed },
+        { name: "Variable", value: simulatedValues.variable },
+        { name: "Savings", value: simulatedValues.savings },
+        {
+          name: "Remaining",
+          value: Math.max(
+            0,
+            (formData?.salary || 0) -
+              (simulatedValues.fixed +
+                simulatedValues.variable +
+                simulatedValues.savings),
+          ),
+        },
+      ]
+    : [
+        { name: "Fixed", value: totalFixed },
+        { name: "Variable", value: totalVariable },
+        { name: "Savings", value: totalSavings },
+        { name: "Remaining", value: remaining },
+      ];
 
   return (
     <div className="summary-page">
       <div className="summary-container">
         <div className="summary-header">
-          <h2>📊 Your Financial Snapshot</h2>
-          <p>Here’s a quick glance before we simulate your monthly plan.</p>
+          <h2>Your Financial Snapshot</h2>
+          <p className="subheader">
+            {simulateMode
+              ? "Simulating changes to your budget"
+              : "Here's your current financial plan"}
+          </p>
         </div>
 
-        <div className="summary-left">
-          <div className="donut-chart-container">
-            <DonutChart data={chartData} />
+        <div className="summary-content two-column-layout">
+          {/* LEFT SIDE: Donut chart + sliders */}
+          <div className="left-column">
+            <div className="chart-section">
+              <DonutChart data={chartData} />
+              {!simulateMode && (
+                <button className="auth-btn" onClick={handleSimulate}>
+                  Simulate Now
+                </button>
+              )}
+            </div>
+
+            {simulateMode && (
+              <div className="sliders-section">
+                <WhatIfSliders
+                  values={simulatedValues}
+                  categories={categories}
+                  onChange={handleSliderChange}
+                  onApply={() => setSimulateMode(false)}
+                  onCancel={() => setSimulateMode(false)}
+                  salary={formData?.salary || 0}
+                />
+              </div>
+            )}
           </div>
-        </div>
 
-        <div className="summary-right">
-          <SalaryCard salary={salary} />
-          <SummaryCard title="Fixed Expenses" icon="" data={fixedExpenses} />
-          <SummaryCard
-            title="Variable Expenses"
-            icon=""
-            data={variableExpenses}
-          />
-          <SummaryCard title="Savings Goal" icon="" data={savings} />
-          <SummaryFooter totalOutflow={totalOutflow} remaining={remaining} />
-        </div>
+          {/* RIGHT SIDE: Cards */}
+          <div className="right-column">
+            <SalaryCard salary={formData?.salary || 0} />
 
-        <div className="summary-buttons">
-          <button className="primary-btn" onClick={prevStep}>
-            Back
-          </button>
-          <button
-            className="primary-btn"
-            onClick={() => console.log("Simulating financial plan...")}
-          >
-            Simulate Now
-          </button>
+            <div className="cards-grid">
+              <SummaryCard
+                title="Fixed Expenses"
+                data={formData?.fixedExpenses || {}}
+                overrideTotal={simulateMode ? simulatedValues.fixed : undefined}
+                color={categories.fixed.color}
+              />
+              <SummaryCard
+                title="Variable Expenses"
+                data={formData?.variableExpenses || {}}
+                overrideTotal={
+                  simulateMode ? simulatedValues.variable : undefined
+                }
+                color={categories.variable.color}
+              />
+              <SummaryCard
+                title="Savings Goal"
+                data={formData?.savings || {}}
+                overrideTotal={
+                  simulateMode ? simulatedValues.savings : undefined
+                }
+                color={categories.savings.color}
+              />
+            </div>
+
+            <SummaryFooter
+              totalOutflow={
+                simulateMode
+                  ? simulatedValues.fixed +
+                    simulatedValues.variable +
+                    simulatedValues.savings
+                  : totalOutflow
+              }
+              remaining={
+                simulateMode
+                  ? (formData?.salary || 0) -
+                    (simulatedValues.fixed +
+                      simulatedValues.variable +
+                      simulatedValues.savings)
+                  : remaining
+              }
+            />
+          </div>
         </div>
       </div>
     </div>

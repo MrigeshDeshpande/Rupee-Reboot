@@ -10,14 +10,22 @@ const OnboardingFlow = () => {
   const [formData, setFormData] = React.useState({
     salary: "",
     fixedExpenses: {
-      rent: "",
-      utilities: "",
-      subscriptions: "",
+      Rent: "",
+      Utilities: "",
+      Subscriptions: "",
+    },
+    variableExpenses: {
+      Groceries: "",
+      Transport: "",
+      Entertainment: "",
+    },
+    savings: {
+      Emergency: "",
+      Investments: "",
     },
   });
 
-  const handleNext = (data) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+  const handleNext = () => {
     setStepIndex((prev) => prev + 1);
   };
 
