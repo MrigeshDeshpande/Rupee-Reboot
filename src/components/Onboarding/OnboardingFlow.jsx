@@ -10,18 +10,18 @@ const OnboardingFlow = () => {
   const [formData, setFormData] = React.useState({
     salary: "",
     fixedExpenses: {
-      rent: "",
-      utilities: "",
-      subscriptions: "",
+      Rent: "",
+      Utilities: "",
+      Subscriptions: "",
     },
     variableExpenses: {
-      groceries: "",
-      transport: "",
-      entertainment: "",
+      Groceries: "",
+      Transport: "",
+      Entertainment: "",
     },
     savings: {
-      emergency: "",
-      investments: "",
+      Emergency: "",
+      Investments: "",
     },
   });
 
@@ -29,8 +29,6 @@ const OnboardingFlow = () => {
     setStepIndex((prev) => prev + 1);
   };
 
-  console.log("formData", formData);
-  console.log("stepIndex", stepIndex);
 
   const handlePrev = () => {
     setStepIndex((prev) => Math.max(prev - 1, 0));

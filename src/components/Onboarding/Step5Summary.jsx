@@ -102,7 +102,7 @@ const Step5Summary = ({ formData }) => {
               <DonutChart data={chartData} />
               {!simulateMode && (
                 <button className="auth-btn" onClick={handleSimulate}>
-                  Simulate Changes
+                  Simulate Now
                 </button>
               )}
             </div>

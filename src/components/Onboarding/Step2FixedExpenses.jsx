@@ -33,8 +33,8 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             id="rent"
             type="number"
-            name="rent"
-            value={formData.fixedExpenses?.rent || ""}
+            name="Rent"
+            value={formData.fixedExpenses?.Rent || ""}
             onChange={handleChange}
             required
           />
@@ -45,8 +45,8 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             id="utilities"
             type="number"
-            name="utilities"
-            value={formData.fixedExpenses?.utilities || ""}
+            name="Utilities"
+            value={formData.fixedExpenses?.Utilities || ""}
             onChange={handleChange}
             required
           />
@@ -57,8 +57,8 @@ const Step2FixedExpenses = ({ formData, setFormData, onNext, prevStep }) => {
           <input
             id="subscriptions"
             type="number"
-            name="subscriptions"
-            value={formData.fixedExpenses?.subscriptions || ""}
+            name="Subscriptions"
+            value={formData.fixedExpenses?.Subscriptions || ""}
             onChange={handleChange}
             required
           />

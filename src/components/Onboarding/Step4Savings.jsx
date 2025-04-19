@@ -30,8 +30,8 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
           </label>
           <input
             type="number"
-            name="emergency"
-            value={formData.savings.emergency || ""}
+            name="Emergency"
+            value={formData.savings.Emergency || ""}
             onChange={handleChange}
             required
           />
@@ -41,8 +41,8 @@ const Step4Savings = ({ formData, setFormData, onNext, prevStep }) => {
           </label>
           <input
             type="number"
-            name="investments"
-            value={formData.savings.investments || ""}
+            name="Investments"
+            value={formData.savings.Investments || ""}
             onChange={handleChange}
             required
           />

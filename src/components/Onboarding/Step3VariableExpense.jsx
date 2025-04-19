@@ -32,8 +32,8 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           </label>
           <input
             type="number"
-            name="groceries"
-            value={formData.variableExpenses.groceries || ""}
+            name="Groceries"
+            value={formData.variableExpenses.Groceries || ""}
             onChange={handleChange}
             required
           />
@@ -43,8 +43,8 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           </label>
           <input
             type="number"
-            name="transport"
-            value={formData.variableExpenses.transport || ""}
+            name="Transport"
+            value={formData.variableExpenses.Transport || ""}
             onChange={handleChange}
             required
           />
@@ -54,8 +54,8 @@ const Step3VariableExpense = ({ formData, setFormData, onNext, prevStep }) => {
           </label>
           <input
             type="number"
-            name="entertainment"
-            value={formData.variableExpenses.entertainment || ""}
+            name="Entertainment"
+            value={formData.variableExpenses.Entertainment || ""}
             onChange={handleChange}
             required
           />

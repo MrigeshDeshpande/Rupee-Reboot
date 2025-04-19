@@ -10,7 +10,6 @@ const SummaryFooter = ({ totalOutflow, remaining }) => {
       ? `-${Math.abs(remaining).toLocaleString()}`
       : `${remaining.toLocaleString()}`;
 
-  console.log("Remaining:", remaining, "isNegative:", isNegative);
 
   return (
     <div
