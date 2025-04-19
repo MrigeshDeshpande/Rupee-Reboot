@@ -160,12 +160,10 @@ const Step5Summary = ({ formData }) => {
               }
               remaining={
                 simulateMode
-                  ? 
-                      (formData?.salary || 0) -
-                        (simulatedValues.fixed +
-                          simulatedValues.variable +
-                          simulatedValues.savings)
-                    
+                  ? (formData?.salary || 0) -
+                    (simulatedValues.fixed +
+                      simulatedValues.variable +
+                      simulatedValues.savings)
                   : remaining
               }
             />

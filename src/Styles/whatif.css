@@ -98,24 +98,24 @@ input[type="range"]:hover {
 .slider-group {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
-  padding: 1rem; 
+  gap: 15px;
+  padding: 1rem;
 }
 
 .slider-header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 .slider-header span {
-  font-size: 1.2rem; 
-  font-weight: 500; 
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .slider-limits span {
-  font-size: 17px; 
-  font-weight: 500; 
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .custom-slider {
@@ -183,8 +183,8 @@ input[type="range"]:hover {
 }
 
 .warning-badge {
-  color: white; 
-  background: red; 
+  color: white;
+  background: red;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-weight: bold;

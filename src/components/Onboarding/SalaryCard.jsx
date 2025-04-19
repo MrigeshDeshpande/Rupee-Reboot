@@ -11,9 +11,7 @@ const SummaryCard = ({ title, data }) => {
 
   return (
     <div className="summary-card">
-      <h4>
-         {title}
-      </h4>
+      <h4>{title}</h4>
       {Object.entries(data).map(([key, value]) => (
         <p className="summary-item" key={key}>
           {key}: ₹{value}

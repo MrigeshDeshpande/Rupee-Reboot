@@ -11,9 +11,7 @@ const SummaryCard = ({ title, data, overrideTotal }) => {
   return (
     <div className="summary-card">
       <div className="summary-card-header">
-        <h3>
-         {title}
-        </h3>
+        <h3>{title}</h3>
         <span className="summary-card-total">₹{total.toLocaleString()}</span>
       </div>
 
