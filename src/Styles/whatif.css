@@ -80,7 +80,7 @@ input[type="range"]:hover {
 
 .simulation-actions {
   display: flex;
-  gap: 20px;
+  gap: 140px;
 }
 
 .simulation-header p {
@@ -93,6 +93,29 @@ input[type="range"]:hover {
 
 .custom-slider {
   all: unset;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  padding: 1rem; 
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 10px; 
+}
+.slider-header span {
+  font-size: 1.2rem; 
+  font-weight: 500; 
+}
+
+.slider-limits span {
+  font-size: 17px; 
+  font-weight: 500; 
 }
 
 .custom-slider {
@@ -151,4 +174,18 @@ input[type="range"]:hover {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+  font-size: large;
+  font-style: oblique;
+}
+
+.status-item.warning {
+  color: red;
+}
+
+.warning-badge {
+  color: white; 
+  background: red; 
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
 }

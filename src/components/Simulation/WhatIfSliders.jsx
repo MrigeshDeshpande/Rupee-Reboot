@@ -39,7 +39,6 @@ const WhatIfSliders = ({
         {Object.keys(categories).map((key) => (
           <div className="slider-group" key={key}>
             <div className="slider-header">
-              <span className="slider-icon">{categories[key].icon}</span>
               <span className="slider-title">{categories[key].label}</span>
               <span className="slider-value" data-value={values[key]}>
                 ₹{values[key].toLocaleString()}

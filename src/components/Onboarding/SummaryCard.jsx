@@ -1,7 +1,7 @@
 import React from "react";
 import "../../Styles/Summary.css";
 
-const SummaryCard = ({ title, icon, data, overrideTotal }) => {
+const SummaryCard = ({ title, data, overrideTotal }) => {
   const isSimulated = overrideTotal !== undefined;
 
   const total = isSimulated
@@ -12,7 +12,7 @@ const SummaryCard = ({ title, icon, data, overrideTotal }) => {
     <div className="summary-card">
       <div className="summary-card-header">
         <h3>
-          {icon} {title}
+         {title}
         </h3>
         <span className="summary-card-total">₹{total.toLocaleString()}</span>
       </div>

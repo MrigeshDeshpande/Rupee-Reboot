@@ -52,12 +52,12 @@ p {
 
 .nav-links li a {
   text-decoration: none;
-  color: #334155; /* dark slate */
+  color: #334155; 
   display: block;
 }
 
 .nav-links li a:hover {
-  color: #22c55e; /* your green */
+  color: #22c55e; 
 }
 
 .logo {

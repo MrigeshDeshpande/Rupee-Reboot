@@ -39,9 +39,9 @@ const Step5Summary = ({ formData }) => {
     }, [formData]);
 
   const categories = {
-    fixed: { label: "Fixed", icon: "🏠", color: "#22c55e" },
-    variable: { label: "Variable", icon: "🛍️", color: "#3b82f6" },
-    savings: { label: "Savings", icon: "💰", color: "#f59e0b" },
+    fixed: { label: "Fixed", color: "#22c55e" },
+    variable: { label: "Variable", color: "#3b82f6" },
+    savings: { label: "Savings", color: "#f59e0b" },
   };
 
   const handleSimulate = () => {
@@ -102,7 +102,7 @@ const Step5Summary = ({ formData }) => {
               <DonutChart data={chartData} />
               {!simulateMode && (
                 <button className="auth-btn" onClick={handleSimulate}>
-                  🧮 Simulate Changes
+                  Simulate Changes
                 </button>
               )}
             </div>
@@ -128,14 +128,12 @@ const Step5Summary = ({ formData }) => {
             <div className="cards-grid">
               <SummaryCard
                 title="Fixed Expenses"
-                icon={categories.fixed.icon}
                 data={formData?.fixedExpenses || {}}
                 overrideTotal={simulateMode ? simulatedValues.fixed : undefined}
                 color={categories.fixed.color}
               />
               <SummaryCard
                 title="Variable Expenses"
-                icon={categories.variable.icon}
                 data={formData?.variableExpenses || {}}
                 overrideTotal={
                   simulateMode ? simulatedValues.variable : undefined
@@ -144,7 +142,6 @@ const Step5Summary = ({ formData }) => {
               />
               <SummaryCard
                 title="Savings Goal"
-                icon={categories.savings.icon}
                 data={formData?.savings || {}}
                 overrideTotal={
                   simulateMode ? simulatedValues.savings : undefined
@@ -163,13 +160,12 @@ const Step5Summary = ({ formData }) => {
               }
               remaining={
                 simulateMode
-                  ? Math.max(
-                      0,
+                  ? 
                       (formData?.salary || 0) -
                         (simulatedValues.fixed +
                           simulatedValues.variable +
-                          simulatedValues.savings),
-                    )
+                          simulatedValues.savings)
+                    
                   : remaining
               }
             />

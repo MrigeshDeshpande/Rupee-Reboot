@@ -101,18 +101,29 @@
 .summary-card.summary-footer {
   border-left-color: var(--secondary-color);
   padding-top: 1rem;
+  
+}
+.summary-card.summary-footer.warning {
+  border-left-color: #ef4444; 
 }
 
-.summary-card .green {
-  color: var(--secondary-color);
+.summary-card.summary-footer .green {
+  color: var(--secondary-color); 
   font-weight: 600;
-  margin-top: 0.5rem;
 }
 
-.summary-card .red {
-  color: #ef4444;
+.summary-card.summary-footer .red {
+  color: #ef4444; 
   font-weight: 600;
+}
+
+.summary-card.summary-footer p {
+  font-size: 0.9rem;
+  color: #64748b; 
   margin-top: 0.5rem;
+  font-style: italic;
+  text-align: center;
+  font-size: large;
 }
 
 .summary-card ul {
