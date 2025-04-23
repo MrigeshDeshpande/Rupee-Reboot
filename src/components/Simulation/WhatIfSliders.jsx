@@ -1,5 +1,6 @@
 import React from "react";
 import "../../Styles/whatif.css";
+import BudgetOptimizer from "../BudgetOptimizer";
 
 const WhatIfSliders = ({
   values,
@@ -25,7 +26,12 @@ const salaryAmount = formData?.salary || salary || 0;
 const effectiveRemaining = salaryAmount - totalAllocated;
 const isOverBudget = effectiveRemaining < 0;
 
-  
+const handleOptimizeBudget = (idealBudget) => {
+  onChange("fixed", Math.round(idealBudget.fixed));
+  onChange("variable", Math.round(idealBudget.variable));
+  onChange("savings", Math.round(idealBudget.savings));
+};
+
   return (
     <div className="simulation-panel">
       <div className="simulation-header">
@@ -78,13 +84,14 @@ const isOverBudget = effectiveRemaining < 0;
       </div>
 
       <div className="simulation-actions">
-        <button className="auth-btn" onClick={onCancel}>
-          Discard Changes
-        </button>
-        <button className="auth-btn" onClick={onApply} disabled={isOverBudget}>
-          {isOverBudget ? "Fix Over Budget" : "Apply Changes"}
-        </button>
-      </div>
+  <button className="auth-btn" onClick={onCancel}>Discard Changes</button>
+
+  {isOverBudget ? (
+    <BudgetOptimizer salary={salary} onOptimize={handleOptimizeBudget} />
+  ) : (
+    <button className="auth-btn" onClick={onApply}>Save Budget</button>
+  )}
+</div>
     </div>
   );
 };
