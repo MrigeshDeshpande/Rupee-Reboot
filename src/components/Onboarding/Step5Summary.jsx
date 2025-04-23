@@ -12,6 +12,9 @@ const Step5Summary = ({ formData }) => {
     fixed: 0,
     variable: 0,
     savings: 0,
+    fixedExpenses: {},
+    variableExpenses: {},
+    savingsData: {},
   });
 
   // Memoized calculations
@@ -45,21 +48,53 @@ const Step5Summary = ({ formData }) => {
   };
 
   const handleSimulate = () => {
+ 
     setSimulatedValues({
       fixed: totalFixed,
       variable: totalVariable,
       savings: totalSavings,
+      fixedExpenses: { ...formData.fixedExpenses }, 
+      variableExpenses: { ...formData.variableExpenses },
+      savingsData: { ...formData.savings },
     });
+  
     setSimulateMode(true);
-  };
 
+  };
+  
+
+  const scaleSubcategories = (original, newTotal) => {
+    const originalTotal = Object.values(original).reduce((sum, v) => sum + Number(v), 0);
+    if (originalTotal === 0) return original; 
+  
+    const scaled = {};
+    for (let key in original) {
+      const ratio = Number(original[key]) / originalTotal;
+      scaled[key] = Math.round(ratio * newTotal);
+    }
+    return scaled;
+  };
+  
   const handleSliderChange = (category, value) => {
+    const baseKey = {
+      fixed: "fixedExpenses",
+      variable: "variableExpenses",
+      savings: "savings",
+    };
+  
+    const original = formData[baseKey[category]] || {};
+    const scaled = scaleSubcategories(original, value);
+  
     setSimulatedValues((prev) => ({
       ...prev,
       [category]: Number(value),
+      [baseKey[category]]: scaled,
     }));
-  };
 
+   
+  };
+  
+  
   const chartData = simulateMode
     ? [
         { name: "Fixed", value: simulatedValues.fixed },
@@ -116,6 +151,13 @@ const Step5Summary = ({ formData }) => {
                   onApply={() => setSimulateMode(false)}
                   onCancel={() => setSimulateMode(false)}
                   salary={formData?.salary || 0}
+                  simulateMode={simulateMode}
+                  simulatedValues={simulatedValues}
+                  totalOutflow={
+                    simulatedValues.fixed +
+                    simulatedValues.variable +
+                    simulatedValues.savings
+                  }
                 />
               </div>
             )}
@@ -128,24 +170,28 @@ const Step5Summary = ({ formData }) => {
             <div className="cards-grid">
               <SummaryCard
                 title="Fixed Expenses"
-                data={formData?.fixedExpenses || {}}
+                data={simulateMode ? simulatedValues.fixedExpenses : formData?.fixedExpenses}
                 overrideTotal={simulateMode ? simulatedValues.fixed : undefined}
                 color={categories.fixed.color}
               />
               <SummaryCard
                 title="Variable Expenses"
-                data={formData?.variableExpenses || {}}
-                overrideTotal={
-                  simulateMode ? simulatedValues.variable : undefined
+                data={
+                  simulateMode
+                    ? simulatedValues.variableExpenses
+                    : formData?.variableExpenses || {}
                 }
+                overrideTotal={simulateMode ? simulatedValues.variable : undefined}
                 color={categories.variable.color}
               />
               <SummaryCard
                 title="Savings Goal"
-                data={formData?.savings || {}}
-                overrideTotal={
-                  simulateMode ? simulatedValues.savings : undefined
+                data={
+                  simulateMode
+                    ? simulatedValues.savingsData
+                    : formData?.savings || {}
                 }
+                overrideTotal={simulateMode ? simulatedValues.savings : undefined}
                 color={categories.savings.color}
               />
             </div>

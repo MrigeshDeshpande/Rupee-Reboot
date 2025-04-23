@@ -84,6 +84,7 @@
   box-shadow: 0 4px 12px var(--card-shadow);
   border-left: 4px solid var(--primary-color);
   margin-bottom: 30px;
+  margin-left: -60px; 
 }
 
 .summary-card h4 {

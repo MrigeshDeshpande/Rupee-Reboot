@@ -15,9 +15,6 @@ const SummaryCard = ({ title, data, overrideTotal }) => {
         <span className="summary-card-total">₹{total.toLocaleString()}</span>
       </div>
 
-      {isSimulated ? (
-        <p className="simulated-note">Simulation mode active</p>
-      ) : (
         <ul className="summary-card-list">
           {Object.entries(data).map(([key, value]) => (
             <li key={key}>
@@ -26,7 +23,7 @@ const SummaryCard = ({ title, data, overrideTotal }) => {
             </li>
           ))}
         </ul>
-      )}
+    
     </div>
   );
 };

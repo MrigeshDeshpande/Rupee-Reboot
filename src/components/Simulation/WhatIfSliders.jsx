@@ -8,14 +8,24 @@ const WhatIfSliders = ({
   onApply,
   onCancel,
   salary,
+  simulateMode,
+  simulatedValues,
+  formData,
 }) => {
-  const totalAllocated = Object.values(values).reduce(
-    (sum, val) => sum + val,
-    0,
-  );
-  const remaining = salary - totalAllocated;
-  const isOverBudget = remaining < 0;
 
+  const simulatedTotal =
+  simulatedValues.fixed + simulatedValues.variable + simulatedValues.savings;
+
+const totalAllocated = simulateMode
+  ? simulatedTotal
+  : Object.values(values).reduce((sum, val) => sum + val, 0);
+
+const salaryAmount = formData?.salary || salary || 0;
+
+const effectiveRemaining = salaryAmount - totalAllocated;
+const isOverBudget = effectiveRemaining < 0;
+
+  
   return (
     <div className="simulation-panel">
       <div className="simulation-header">
@@ -24,16 +34,19 @@ const WhatIfSliders = ({
       </div>
 
       <div className="simulation-status">
-        <div className="status-item">
-          <span>Total Allocated:</span>
-          <span>₹{totalAllocated.toLocaleString()}</span>
-        </div>
-        <div className={`status-item ${isOverBudget ? "warning" : "success"}`}>
-          <span>Remaining:</span>
-          <span>₹{Math.abs(remaining).toLocaleString()}</span>
-          {isOverBudget && <span className="warning-badge">OVER BUDGET</span>}
-        </div>
-      </div>
+  <div className="status-item">
+    <span>Total Allocated:</span>
+    <span>₹{totalAllocated.toLocaleString()}</span>
+  </div>
+
+  <div className={`status-item ${isOverBudget ? "warning" : "success"}`}>
+    <span>Remaining:</span>
+    <span>₹{Math.abs(effectiveRemaining).toLocaleString()}</span>
+    {isOverBudget && <span className="warning-badge">OVER BUDGET</span>}
+  </div>
+</div>
+
+
 
       <div className="sliders-container">
         {Object.keys(categories).map((key) => (
