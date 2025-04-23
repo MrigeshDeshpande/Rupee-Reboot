@@ -85,13 +85,17 @@ const Step5Summary = ({ formData }) => {
     const original = formData[baseKey[category]] || {};
     const scaled = scaleSubcategories(original, value);
   
-    setSimulatedValues((prev) => ({
-      ...prev,
-      [category]: Number(value),
-      [baseKey[category]]: scaled,
-    }));
-
-   
+    setSimulatedValues((prev) => {
+      const updatedSavingsData = category === "savings" ? scaled : prev.savingsData; 
+      return {
+        ...prev,
+        [category]: Number(value),
+        [baseKey[category]]: scaled,
+        savingsData: updatedSavingsData, 
+        savings: Object.values(updatedSavingsData).reduce((sum, val) => sum + Number(val), 0),
+      };
+    });
+  
   };
   
   
@@ -212,6 +216,7 @@ const Step5Summary = ({ formData }) => {
                       simulatedValues.savings)
                   : remaining
               }
+              salary={formData?.salary || 0}
             />
           </div>
         </div>
