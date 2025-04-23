@@ -15,15 +15,14 @@ const SummaryCard = ({ title, data, overrideTotal }) => {
         <span className="summary-card-total">₹{total.toLocaleString()}</span>
       </div>
 
-        <ul className="summary-card-list">
-          {Object.entries(data).map(([key, value]) => (
-            <li key={key}>
-              <span>{key}</span>
-              <span>₹{Number(value).toLocaleString()}</span>
-            </li>
-          ))}
-        </ul>
-    
+      <ul className="summary-card-list">
+        {Object.entries(data).map(([key, value]) => (
+          <li key={key}>
+            <span>{key}</span>
+            <span>₹{Number(value).toLocaleString()}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

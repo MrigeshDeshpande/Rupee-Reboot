@@ -10,11 +10,15 @@ const SummaryFooter = ({ totalOutflow, remaining, salary }) => {
       ? `-${Math.abs(remaining).toLocaleString()}`
       : `${remaining.toLocaleString()}`;
 
-  const spentPercentage = salary > 0 ? ((totalOutflow / salary) * 100) : 0;
+  const spentPercentage = salary > 0 ? (totalOutflow / salary) * 100 : 0;
   return (
-    <div className={`summary-card summary-footer ${isNegative ? "warning" : ""}`}>
+    <div
+      className={`summary-card summary-footer ${isNegative ? "warning" : ""}`}
+    >
       <p className="orange">Total Outflow: ₹{formattedOutflow}</p>
-      <p className={isNegative ? "red" : "green"}>Remaining: ₹{formattedRemaining}</p>
+      <p className={isNegative ? "red" : "green"}>
+        Remaining: ₹{formattedRemaining}
+      </p>
       {salary > 0 && (
         <p className="green">Salary: ₹{salary.toLocaleString()}</p>
       )}
