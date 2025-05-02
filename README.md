@@ -16,14 +16,14 @@ Existing tools felt **overwhelming** or **boring** (Excel). So I built RupeeRebo
 - **Instant visual feedback** via dynamic charts.
 - **Designed for Indian millennials** out of courtesy
 
-## ✨ Features
+## ✨ Features  
 
-| Feature               | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------- | --- |
-| **Salary Playground** | Drag sliders to simulate raises, rent hikes, or investment changes. |
-| **Donut Charts**      | Visualize where your money _actually_ goes.                         |
-| **Peer Comparison**   | See how your spending stacks up against anonymized users.           |
-| <!--                  | **Time Machine**                                                    | Project your net worth in 5/10 years (with optimistic/pessimistic modes). | --> |
+| Feature               | Description                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| **Salary Playground** | Experiment with financial scenarios using interactive sliders—adjust salaries, rent, or investments to see potential impacts. |
+| **Donut Charts**      | Gain insight into your spending habits with visually engaging breakdowns that highlight exactly where your money flows. |
+| **Peer Comparison**   | Measure your financial habits against anonymized user data to see how you stack up in different spending categories. |
+| **Time Machine**      | Project your net worth in 5/10 years (with optimistic/pessimistic modes). | --> |
 
 ## 🛠️ Tech Stack
 
