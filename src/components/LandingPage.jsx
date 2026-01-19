@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/LandingPage.css";
+import "../Styles/LandingPage.css";
 import SuccessFactorsImg from "../assets/ok.svg";
 import { Link } from "react-router-dom";
 
