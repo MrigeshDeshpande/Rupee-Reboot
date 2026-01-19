@@ -10,8 +10,26 @@ import {
 } from "../../domain/financeEngine";
 import "../../Styles/Summary.css";
 
+/**
+ * Final summary screen (Step 5) showing budget breakdown with donut chart,
+ * category cards, salary info and "what-if" simulation mode.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.formData - Complete form data collected from previous steps
+ * @param {number} props.formData.income - Monthly net income/salary
+ * @param {Object} props.formData.fixedExpenses - Object of {category: amount} for fixed expenses
+ * @param {Object} props.formData.variableExpenses - Object of {category: amount} for variable expenses
+ * @param {Object} props.formData.savings - Object of {category: amount} for savings/investments
+ * @returns {JSX.Element} Summary dashboard with visualization and simulation controls
+ */
 const Step5Summary = ({ formData }) => {
   const [simulateMode, setSimulateMode] = useState(false);
+
+  /**
+   * Stores current simulated values when user is in "what-if" mode
+   * @type {Object}
+   */
   const [simulatedValues, setSimulatedValues] = useState({
     fixed: 0,
     variable: 0,
@@ -21,6 +39,10 @@ const Step5Summary = ({ formData }) => {
     savingsData: {},
   });
 
+  /**
+   * Calculates real (non-simulated) totals from form data
+   * Memoized to prevent unnecessary recalculations
+   */
   const {
     income,
     fixed,
@@ -30,12 +52,16 @@ const Step5Summary = ({ formData }) => {
     remaining,
   } = useMemo(() => calculateTotals(formData), [formData]);
 
+  /** Category metadata for consistent styling and labeling across components */
   const categories = {
     fixed: { label: "Fixed", color: "#22c55e" },
     variable: { label: "Variable", color: "#3b82f6" },
     savings: { label: "Savings", color: "#f59e0b" },
   };
 
+  /**
+   * Activates simulation mode and initializes simulated values with current plan
+   */
   const handleSimulate = () => {
     setSimulatedValues({
       fixed,
@@ -48,6 +74,12 @@ const Step5Summary = ({ formData }) => {
     setSimulateMode(true);
   };
 
+  /**
+   * Handles changes from WhatIfSliders and updates simulated totals & breakdown
+   *
+   * @param {"fixed" | "variable" | "savings"} category - Which budget category is being adjusted
+   * @param {number|string} value - New target total for the category (from slider)
+   */
   const handleSliderChange = (category, value) => {
     const keyMap = {
       fixed: "fixedExpenses",
@@ -56,7 +88,6 @@ const Step5Summary = ({ formData }) => {
     };
 
     const baseKey = keyMap[category];
-
     const original = simulateMode
       ? simulatedValues[baseKey] || {}
       : formData[baseKey] || {};
@@ -80,7 +111,10 @@ const Step5Summary = ({ formData }) => {
     });
   };
 
-
+  /**
+   * Data prepared for the DonutChart component.
+   * Switches between real values and simulated values depending on mode.
+   */
   const chartData = useMemo(() => {
     if (!simulateMode) {
       return [
@@ -112,7 +146,6 @@ const Step5Summary = ({ formData }) => {
     income,
   ]);
 
-
   return (
     <div className="summary-page">
       <div className="summary-container">
@@ -126,7 +159,7 @@ const Step5Summary = ({ formData }) => {
         </div>
 
         <div className="summary-content two-column-layout">
-          {/* LEFT SIDE */}
+          {/* LEFT SIDE – Chart + Simulation Controls */}
           <div className="left-column">
             <div className="chart-section">
               <DonutChart data={chartData} />
@@ -156,7 +189,7 @@ const Step5Summary = ({ formData }) => {
             )}
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT SIDE – Salary + Breakdown Cards + Footer */}
           <div className="right-column">
             <SalaryCard salary={income} />
 
@@ -203,16 +236,16 @@ const Step5Summary = ({ formData }) => {
               totalOutflow={
                 simulateMode
                   ? simulatedValues.fixed +
-                  simulatedValues.variable +
-                  simulatedValues.savings
+                    simulatedValues.variable +
+                    simulatedValues.savings
                   : totalOutflow
               }
               remaining={
                 simulateMode
                   ? income -
-                  (simulatedValues.fixed +
-                    simulatedValues.variable +
-                    simulatedValues.savings)
+                    (simulatedValues.fixed +
+                      simulatedValues.variable +
+                      simulatedValues.savings)
                   : remaining
               }
               salary={income}
