@@ -4,45 +4,48 @@ import SummaryCard from "./SummaryCard";
 import SalaryCard from "./SalaryCard";
 import SummaryFooter from "./SummaryFooter";
 import WhatIfSliders from "../Simulation/WhatIfSliders";
+
 import {
   calculateTotals,
   scaleExpenses,
+} from "../../domain/financeSelectors";
+
+import {
+  runStressTest,
+  evaluatePlanFragility,
 } from "../../domain/financeEngine";
+
 import "../../Styles/Summary.css";
 
-/**
- * Final summary screen (Step 5) showing budget breakdown with donut chart,
- * category cards, salary info and "what-if" simulation mode.
- *
- * @component
- * @param {Object} props
- * @param {Object} props.formData - Complete form data collected from previous steps
- * @param {number} props.formData.income - Monthly net income/salary
- * @param {Object} props.formData.fixedExpenses - Object of {category: amount} for fixed expenses
- * @param {Object} props.formData.variableExpenses - Object of {category: amount} for variable expenses
- * @param {Object} props.formData.savings - Object of {category: amount} for savings/investments
- * @returns {JSX.Element} Summary dashboard with visualization and simulation controls
- */
 const Step5Summary = ({ formData }) => {
   const [simulateMode, setSimulateMode] = useState(false);
 
-  /**
-   * Stores current simulated values when user is in "what-if" mode
-   * @type {Object}
-   */
-  const [simulatedValues, setSimulatedValues] = useState({
-    fixed: 0,
-    variable: 0,
-    savings: 0,
-    fixedExpenses: {},
-    variableExpenses: {},
-    savingsData: {},
-  });
+  /* -------------------- ENGINE TRUTH -------------------- */
 
-  /**
-   * Calculates real (non-simulated) totals from form data
-   * Memoized to prevent unnecessary recalculations
-   */
+  const fragilityResult = useMemo(() => {
+    return evaluatePlanFragility({
+      monthlyIncome: formData.income,
+      fixedExpenses: formData.fixedExpenses,
+      variableExpenses: formData.variableExpenses,
+      emergencyFund: formData.emergencyFund,
+    });
+  }, [formData]);
+
+  const stressResult = useMemo(() => {
+    return runStressTest(
+      {
+        monthlyIncome: formData.income,
+        fixedExpenses: formData.fixedExpenses,
+        variableExpenses: formData.variableExpenses,
+        emergencyFund: formData.emergencyFund,
+      },
+      20,
+      40
+    );
+  }, [formData]);
+
+  /* -------------------- UI TOTALS -------------------- */
+
   const {
     income,
     fixed,
@@ -52,16 +55,23 @@ const Step5Summary = ({ formData }) => {
     remaining,
   } = useMemo(() => calculateTotals(formData), [formData]);
 
-  /** Category metadata for consistent styling and labeling across components */
+  /* -------------------- SIMULATION STATE -------------------- */
+
+  const [simulatedValues, setSimulatedValues] = useState({
+    fixed: 0,
+    variable: 0,
+    savings: 0,
+    fixedExpenses: {},
+    variableExpenses: {},
+    savingsData: {},
+  });
+
   const categories = {
     fixed: { label: "Fixed", color: "#22c55e" },
     variable: { label: "Variable", color: "#3b82f6" },
     savings: { label: "Savings", color: "#f59e0b" },
   };
 
-  /**
-   * Activates simulation mode and initializes simulated values with current plan
-   */
   const handleSimulate = () => {
     setSimulatedValues({
       fixed,
@@ -74,12 +84,6 @@ const Step5Summary = ({ formData }) => {
     setSimulateMode(true);
   };
 
-  /**
-   * Handles changes from WhatIfSliders and updates simulated totals & breakdown
-   *
-   * @param {"fixed" | "variable" | "savings"} category - Which budget category is being adjusted
-   * @param {number|string} value - New target total for the category (from slider)
-   */
   const handleSliderChange = (category, value) => {
     const keyMap = {
       fixed: "fixedExpenses",
@@ -111,10 +115,8 @@ const Step5Summary = ({ formData }) => {
     });
   };
 
-  /**
-   * Data prepared for the DonutChart component.
-   * Switches between real values and simulated values depending on mode.
-   */
+  /* -------------------- CHART DATA -------------------- */
+
   const chartData = useMemo(() => {
     if (!simulateMode) {
       return [
@@ -146,6 +148,8 @@ const Step5Summary = ({ formData }) => {
     income,
   ]);
 
+  /* -------------------- RENDER -------------------- */
+
   return (
     <div className="summary-page">
       <div className="summary-container">
@@ -154,12 +158,12 @@ const Step5Summary = ({ formData }) => {
           <p className="subheader">
             {simulateMode
               ? "Simulating changes to your budget"
-              : "Here's your current financial plan"}
+              : "Here's your current financial reality"}
           </p>
         </div>
 
         <div className="summary-content two-column-layout">
-          {/* LEFT SIDE – Chart + Simulation Controls */}
+          {/* LEFT COLUMN */}
           <div className="left-column">
             <div className="chart-section">
               <DonutChart data={chartData} />
@@ -178,8 +182,6 @@ const Step5Summary = ({ formData }) => {
                 onApply={() => setSimulateMode(false)}
                 onCancel={() => setSimulateMode(false)}
                 salary={income}
-                simulateMode={simulateMode}
-                simulatedValues={simulatedValues}
                 totalOutflow={
                   simulatedValues.fixed +
                   simulatedValues.variable +
@@ -189,10 +191,61 @@ const Step5Summary = ({ formData }) => {
             )}
           </div>
 
-          {/* RIGHT SIDE – Salary + Breakdown Cards + Footer */}
+          {/* RIGHT COLUMN */}
           <div className="right-column">
             <SalaryCard salary={income} />
 
+            {/* REALITY CHECK */}
+            <div
+              style={{
+                marginTop: "16px",
+                padding: "14px",
+                border: "1px solid #e5e7eb",
+                borderRadius: "8px",
+                background: "#fafafa",
+              }}
+            >
+              <h4 style={{ marginBottom: "8px" }}>Reality Check</h4>
+
+              <p>
+                At your current spending level, you can sustain this plan for{" "}
+                <strong>
+                  {fragilityResult.bufferMonths === Infinity
+                    ? "an unlimited time"
+                    : `${fragilityResult.bufferMonths.toFixed(1)} months`}
+                </strong>{" "}
+                without income disruption.
+              </p>
+
+              <p>
+                Your monthly recovery margin is{" "}
+                <strong>
+                  ₹{fragilityResult.surplus.toLocaleString()}
+                </strong>
+                .
+              </p>
+
+              <p>
+                This plan is{" "}
+                <strong>{fragilityResult.status.toLowerCase()}</strong> because:
+              </p>
+
+              <ul style={{ paddingLeft: "18px", marginTop: "6px" }}>
+                {fragilityResult.reasons.slice(0, 2).map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+
+              <p style={{ marginTop: "8px", fontSize: "0.9rem", color: "#555" }}>
+                Under expense shocks, this plan breaks in{" "}
+                <strong>
+                  {Math.round(stressResult.fragilityScore * 100)}%
+                </strong>{" "}
+                of simulated scenarios.
+              </p>
+            </div>
+
+            {/* BREAKDOWN */}
             <div className="cards-grid">
               <SummaryCard
                 title="Fixed Expenses"
@@ -219,7 +272,7 @@ const Step5Summary = ({ formData }) => {
               />
 
               <SummaryCard
-                title="Savings Goal"
+                title="Savings"
                 data={
                   simulateMode
                     ? simulatedValues.savingsData
