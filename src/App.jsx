@@ -1,8 +1,5 @@
-import "./App.css";
-import Hello from "./hello";
+import Onboarding from "./pages/Onboarding";
 
-function App() {
-  return <Hello />;
+export default function App() {
+  return <Onboarding />;
 }
-
-export default App;
