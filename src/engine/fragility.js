@@ -1,9 +1,27 @@
-export function classifyFragility({runwayMonths}){
-    if(runwayMonths === Infinity) return "stable";
-    if(runwayMonths == null) return "breaking";
+export function classifyFragility({ runwayMonths }) {
+    if (runwayMonths === Infinity) {
+        return {
+            status: "stable",
+            severity: 0
+        };
+    }
 
-    if(runwayMonths <= 3 ) return "breaking";
-    if(runwayMonths <= 12) return "fragile";
+    if (runwayMonths <= 3) {
+        return {
+            status: "breaking",
+            severity: 1
+        };
+    }
 
-    return "stable";
+    if (runwayMonths <= 12) {
+        return {
+            status: "fragile",
+            severity: 0.6
+        };
+    }
+
+    return {
+        status: "stable",
+        severity: 0.2
+    };
 }

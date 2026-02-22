@@ -1,25 +1,27 @@
-export function calculateRunway({ netmonthly, savings = 0 }) {
-    if (netmonthly >= 0) {
+export function calculateRunway({ netMonthly, savings = 0 }) {
+    const normalizedSavings = Number(savings) || 0;
+
+    if (netMonthly >= 0) {
         return {
             runwayMonths: Infinity,
             monthlyBurn: 0,
-            monthlySurplus: netmonthly
-        }
-    };
+            monthlySurplus: netMonthly
+        };
+    }
 
-    const monthlyBurn = Math.abs(netmonthly);
+    const monthlyBurn = Math.abs(netMonthly);
 
-    if (savings <= 0) {
+    if (normalizedSavings <= 0) {
         return {
-            runwayMonths: null,
+            runwayMonths: 0,
             monthlyBurn,
             monthlySurplus: 0
         };
     }
 
     return {
-        runwayMonths: Math.floor(savings / monthlyBurn),
+        runwayMonths: Math.floor(normalizedSavings / monthlyBurn),
         monthlyBurn,
         monthlySurplus: 0
-    }
+    };
 }

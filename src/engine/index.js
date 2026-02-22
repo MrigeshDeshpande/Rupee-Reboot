@@ -1,18 +1,41 @@
-import { calculateMonthlyReality } from './reality';
-import { calculateRunway } from './runway';
-import { classifyFragility } from './fragility';
+import { calculateMonthlyReality } from "./reality.js";
+import { calculateRunway } from "./runway.js";
+import { classifyFragility } from "./fragility.js";
 
 export function evaluateFinancialReality(input) {
-    const reality = calculateMonthlyReality(input);
-    const runway = calculateRunway({
-        netmonthly: reality.netMonthly,
-    })
+    const snapshotRaw = calculateMonthlyReality(input);
 
-    const status = classifyFragility(runway);
+    const runwayRaw = calculateRunway({
+        netMonthly: snapshotRaw.netMonthly,
+        savings: input.savings || 0
+    });
+
+    const fragility = classifyFragility({
+        runwayMonths: runwayRaw.runwayMonths
+    });
 
     return {
-        ...reality,
-        ...runway,
-        status
-    }
+        snapshot: {
+            income: snapshotRaw.monthlyIncome,
+            fixed: snapshotRaw.fixedExpenses,
+            variable: snapshotRaw.variableExpenses,
+            totalExpenses: snapshotRaw.totalExpenses,
+            netMonthly: snapshotRaw.netMonthly
+        },
+
+        runway: {
+            months:
+                runwayRaw.runwayMonths === Infinity
+                    ? null
+                    : runwayRaw.runwayMonths,
+            burn: runwayRaw.monthlyBurn,
+            surplus: runwayRaw.monthlySurplus,
+            type:
+                runwayRaw.runwayMonths === Infinity
+                    ? "infinite"
+                    : "finite"
+        },
+
+        fragility
+    };
 }

@@ -1,4 +1,4 @@
-import { parseMoney } from './money';
+import { parseMoney } from './money.js';
 
 export function calculateMonthlyReality({income, fixed, variable}){
     const monthlyIncome = parseMoney(income);
