@@ -36,7 +36,7 @@ Existing tools felt **overwhelming**  **boring** (Excel). So I built RupeeReboot
 
 - Firebase (Auth + Firestore for saving profiles)
 
-**Deployment**:
+**Deployment**: 
 
 - Vercel (CI/CD setup)
 
