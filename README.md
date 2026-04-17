@@ -10,6 +10,7 @@ As a 20-something in India, I watched friends stress over questions like:
 - _"Should I take this ₹5L pay jump if rent doubles?"_
 - _"Why does my salary vanish by the 20th?"_
 
+
 Existing tools felt **overwhelming**  **boring** (Excel). So I built RupeeReboot: 
 
 - **Simulate life’s "what-ifs"** with sliders (no spreadsheets).
