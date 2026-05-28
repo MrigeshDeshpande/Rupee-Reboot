@@ -16,7 +16,7 @@ Existing tools felt **overwhelming**  **boring** (Excel). So I built RupeeReboot
 
 - **Simulate life’s "what-ifs"** with sliders (no spreadsheets).
 - **Instant visual feedback** via dynamic charts.
-- **Designed for Indian millennials** out of courtesy
+- **Designed for Indian millennials** out of courtesy 
 
 ## ✨ Features  
 
