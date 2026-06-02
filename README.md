@@ -7,7 +7,7 @@ _"Because adulting is hard—but money math shouldn’t be."_
 
 ## Why I Built This
 
-As a 20-something in India, I watched friends stress over questions like:
+As a 20-something in India, I watched friends stress over questions like
 
 
 - _"Should I take this ₹5L pay jump if rent doubles?"_
